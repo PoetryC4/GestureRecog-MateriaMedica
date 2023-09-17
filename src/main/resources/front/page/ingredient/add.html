@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>add</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../plugins/element-ui/index.css" />
+  <link rel="stylesheet" href="../../styles/common.css" />
+  <link rel="stylesheet" href="../../styles/page.css" />
+  <style>
+    .item_input{
+      margin-left: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="addBrand-container" id="ingredient-add-app">
+    <div class="container">
+      <el-form
+        ref="ruleForm"
+        :model="ruleForm"
+        :rules="rules"
+        :inline="false"
+        label-width="180px"
+        class="demo-ruleForm"
+      >
+        <el-form-item
+                class="item_input"
+          label="名称:"
+          prop="ingredientName"
+        >
+          <el-input
+                  v-model="ruleForm.ingredientName"
+                  placeholder="请输入名称"
+                  maxlength="20"
+          />
+        </el-form-item>
+        <el-form-item
+                class="item_input"
+                label="类别:"
+                prop="ingredientType"
+        >
+          <el-input
+                  v-model="ruleForm.ingredientType"
+                  placeholder="请输入类别"
+                  maxlength="2"
+          />
+        </el-form-item>
+        <el-form-item
+                class="item_input"
+                label="释目:"
+                prop="interpretation"
+        >
+          <el-input
+                  v-model="ruleForm.interpretation"
+                  placeholder="请输入释目"
+                  maxlength="400"
+          />
+        </el-form-item>
+        <el-form-item
+                class="item_input"
+                label="集解:"
+                prop="explanations"
+        >
+          <el-input
+                  v-model="ruleForm.explanations"
+                  placeholder="请输入集解"
+                  maxlength="400"
+          />
+        </el-form-item>
+        <el-form-item
+                class="item_input"
+                label="图片名:"
+                prop="picName"
+        >
+          <el-input
+                  v-model="ruleForm.picName"
+                  placeholder="请输入"
+                  maxlength="20"
+          />
+        </el-form-item>
+        <el-form-item
+                class="item_input"
+                label="其他:"
+                prop="note"
+        >
+          <el-input
+                  v-model="ruleForm.note"
+                  placeholder="请输入"
+                  maxlength="400"
+          />
+        </el-form-item>
+
+        <div class="subBox address">
+          <el-form-item>
+            <el-button  >
+              取消
+            </el-button>
+            <el-button
+              type="primary"
+              @click="submitForm('ruleForm', false)"
+            >
+              保存
+            </el-button>
+            <el-button
+              v-if="actionType == 'add'"
+              type="primary"
+              class="continue"
+              @click="submitForm('ruleForm', true)"
+            >
+              保存并继续添加
+            </el-button>
+          </el-form-item>
+        </div>
+      </el-form>
+    </div>
+  </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="../../plugins/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="../../plugins/element-ui/index.js"></script>
+    <!-- 引入axios -->
+    <script src="../../plugins/axios/axios.min.js"></script>
+    <script src="../../js/request.js"></script>
+    <script src="../../api/ingredient.js"></script>
+    <script src="../../js/validate.js"></script>
+    <script src="../../js/index.js"></script>
+    <script>
+      new Vue({
+        el: '#ingredient-add-app',
+        data() {
+          return {
+            ruleForm : {
+              ingredientType:'',
+              ingredientName:'',
+              explanations:'',
+              interpretation:'',
+              picName:'',
+              note:'',
+            }
+          }
+        },
+        computed: {
+          rules () {
+            return {
+              'ingredientType': [{ 'required': true, 'validator': checkType, 'trigger': 'blur' }],
+              'ingredientName': [{ 'required': true, 'validator': checkIngredientName, 'trigger': 'blur' }],
+              'explanations': [{ 'required': false, 'validator': checkIngredientText, 'trigger': 'blur' }],
+              'interpretation': [{ 'required': false, 'validator': checkIngredientText, 'trigger': 'blur' }],
+              'picName': [{ 'required': false, 'trigger': 'blur' }],
+              'note': [{ 'required': false, 'validator': checkIngredientText, 'trigger': 'blur' }],
+            }
+          }
+        },
+        created() {
+          this.id = requestUrlParam('id')
+          this.actionType = this.id ? 'edit' : 'add'
+          if (this.id) {
+            this.init()
+          }
+        },
+        mounted() {
+        },
+        methods: {
+          submitForm (formName, st) {
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+                const params = {
+                    ingredientType:this.ruleForm.ingredientType,
+                    ingredientName:this.ruleForm.ingredientName,
+                    explanations:this.ruleForm.explanations,
+                    interpretation:this.ruleForm.interpretation,
+                    picName:this.ruleForm.picName,
+                    note:this.ruleForm.note,
+                  }
+                  addIngredient(params).then(res => {
+                    if (res.code === 1) {
+                      this.$message.success('添加成功！')
+                      if (!st) {
+
+                      } else {
+                        this.ruleForm = {
+                          ingredientType:'',
+                          ingredientName:'',
+                          explanations:'',
+                          interpretation:'',
+                          picName:'',
+                          note:'',
+                        }
+                      }
+                    } else {
+                      this.$message.error(res.msg || '操作失败')
+                    }
+                  }).catch(err => {
+                    this.$message.error('请求出错了：' + err)
+                  })
+              } else {
+                console.log('error submit!!')
+                return false
+              }
+            })
+          },
+        }
+      })
+    </script>
+</body>
+</html>

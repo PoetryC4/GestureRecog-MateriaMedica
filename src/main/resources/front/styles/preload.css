@@ -1,0 +1,107 @@
+
+@font-face {
+  font-family: 'defaultCharacter';
+  src: url('../fonts/clickCharacter.ttf');
+}
+
+@font-face {
+  font-family: 'FZTZ';
+  src: url('../fonts/FZTZ.TTF ');
+}
+
+.preload_BGChars,.preload_logoChars,.preload_logoCharsEng{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.preloadPart{
+  background-image: url("../images/common/BG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.preload_startOutlines{
+  border: #c53421 5px solid;
+  border-radius: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(255, 250, 248, 0.71);
+  box-shadow: 5px 5px 0 white;
+}
+.preload_BGChars{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.preload_BGChars div,.preload_logoCharsEng div,.preload_logoChars div{
+  font-family: FZTZ, serif;
+  position: absolute;
+  display: none;
+}
+.preload_BGChars div{
+  color: white;
+}
+.preload_logoCharsEng div{
+  color: #c53421;
+  font-size: 40px;
+  transform: rotate(90deg);
+}
+.preload_logoChars div{
+  color: #2c1707;
+  font-size: 330px;
+}
+.preload_Rip{
+  background-image: url("../images/preload/preloadRip.png");
+  position: absolute;
+  height: 130%;
+  width: 130%;
+  line-height: 110%;
+  font-size: 1300px;
+  text-align: left;
+  background-size: 100%, 100%;
+  background-repeat: no-repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-position: 110%, 110%;
+  transform: translateX(-7%) translateY(-10%);
+  overflow: hidden;
+  text-space: -300px;
+}
+.preload_BGChars div{
+  color: white;
+}
+.preload_seal{
+  left: calc(5% + 200px);
+  top: calc(22% + 300px);
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+.preload_startBtn{
+  z-index: 2;
+  height: 100px;
+  width: 220px;
+  left: 760px;
+  top: 340px;
+  position: absolute;
+  line-height: 100px;
+  transform: scale(1);
+}
+.preload_perc, .preload_startChars{
+  font-size: 50px;
+  width: 100%;
+  height: 100%;
+  font-family: FZTZ;
+  text-align: center;
+  line-height: inherit;
+  position: absolute;
+  color: #c53421;
+  text-shadow: 5px 5px 0 white;
+}
+.preload_startBtn:hover{
+  transform: scale(1.1);
+}

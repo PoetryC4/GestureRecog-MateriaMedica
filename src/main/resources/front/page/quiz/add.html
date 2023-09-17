@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>add</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../plugins/element-ui/index.css" />
+  <link rel="stylesheet" href="../../styles/common.css" />
+  <link rel="stylesheet" href="../../styles/page.css" />
+</head>
+<body>
+  <div class="addBrand-container" id="quiz-add-app">
+    <div class="container">
+      <el-form
+        ref="ruleForm"
+        :model="ruleForm"
+        :rules="rules"
+        :inline="false"
+        label-width="180px"
+        class="demo-ruleForm"
+      >
+        <el-form-item
+          label="题目:"
+          prop="title"
+        >
+          <el-input
+                  v-model="ruleForm.title"
+                  placeholder="请输入题目"
+                  maxlength="50"
+          />
+        </el-form-item>
+
+        <el-form-item
+                label="类型:"
+                prop="quizType"
+        >
+          <el-input
+                  v-model="ruleForm.quizType"
+                  placeholder="请输入类型"
+                  maxlength="50"
+          />
+        </el-form-item>
+
+        <el-checkbox v-model="ruleForm.isPro">是否专业？</el-checkbox>
+
+        <el-form-item
+                label="选项A:"
+                prop="choiceA"
+        >
+          <el-input
+                  v-model="ruleForm.choiceA"
+                  placeholder="请输入题目"
+                  maxlength="50"
+          />
+        </el-form-item>
+
+        <el-form-item
+                label="选项B:"
+                prop="choiceB"
+        >
+          <el-input
+                  v-model="ruleForm.choiceB"
+                  placeholder="请输入选项B"
+                  maxlength="50"
+          />
+        </el-form-item>
+
+        <el-form-item
+                label="选项C:"
+                prop="choiceC"
+        >
+          <el-input
+                  v-model="ruleForm.choiceC"
+                  placeholder="请输入选项C"
+                  maxlength="50"
+          />
+        </el-form-item>
+
+        <el-form-item
+                label="选项D:"
+                prop="choiceD"
+        >
+          <el-input
+                  v-model="ruleForm.choiceD"
+                  placeholder="请输入选项D"
+                  maxlength="50"
+          />
+        </el-form-item>
+        <el-checkbox-group v-model="ruleForm.choiceList"
+        :min="1"
+        @change="listSort">
+          <el-checkbox label="A">A是否正确?</el-checkbox>
+          <el-checkbox label="B">B是否正确?</el-checkbox>
+          <el-checkbox label="C">C是否正确?</el-checkbox>
+          <el-checkbox label="D">D是否正确?</el-checkbox>
+        </el-checkbox-group>
+        <el-form-item
+                label="题解:"
+                prop="solution"
+        >
+          <el-input
+                  v-model="ruleForm.solution"
+                  placeholder="请输入题解"
+                  maxlength="50"
+          />
+        </el-form-item>
+        <div class="subBox address">
+          <el-form-item>
+            <el-button  >
+              取消
+            </el-button>
+            <el-button
+              type="primary"
+              @click="submitForm('ruleForm', false)"
+            >
+              保存
+            </el-button>
+            <el-button
+              v-if="actionType == 'add'"
+              type="primary"
+              class="continue"
+              @click="submitForm('ruleForm', true)"
+            >
+              保存并继续添加
+            </el-button>
+          </el-form-item>
+        </div>
+      </el-form>
+    </div>
+  </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="../../plugins/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="../../plugins/element-ui/index.js"></script>
+    <!-- 引入axios -->
+    <script src="../../plugins/axios/axios.min.js"></script>
+    <script src="../../js/request.js"></script>
+    <script src="../../api/quiz.js"></script>
+    <script src="../../js/validate.js"></script>
+    <script src="../../js/index.js"></script>
+    <script>
+      new Vue({
+        el: '#quiz-add-app',
+        data() {
+          return {
+            ruleForm : {
+                'choiceA': '',
+              'choiceB': '',
+              'choiceC': '',
+              'choiceD': '',
+              'title': '',
+              choiceList: ['A'],
+              quizType:-1,
+              isPro:false,
+              'solution':'',
+            }
+          }
+        },
+        computed: {
+          rules () {
+            return {
+              'title': [{ 'required': true, 'validator': checkTitle, 'trigger': 'blur' }],
+              'choiceA': [{ 'required': true, 'validator': checkChoice, 'trigger': 'blur' }],
+              'choiceB': [{ 'required': true, 'validator': checkChoice, 'trigger': 'blur' }],
+              'choiceC': [{ 'required': true, 'validator': checkChoice, 'trigger': 'blur' }],
+              'choiceD': [{ 'required': true, 'validator': checkChoice, 'trigger': 'blur' }],
+              quizType: [{ 'required': true, 'validator': checkType, 'trigger': 'blur' }],
+              'solution': [{ 'required': false, 'validator': checkSolution, 'trigger': 'blur' }],
+            }
+          }
+        },
+        created() {
+          this.id = requestUrlParam('id')
+          this.actionType = this.id ? 'edit' : 'add'
+          if (this.id) {
+            this.init()
+          }
+        },
+        mounted() {
+        },
+        methods: {
+          submitForm (formName, st) {
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+                const params = {
+                    choiceA:this.ruleForm.choiceA,
+                    choiceB:this.ruleForm.choiceB,
+                    choiceC:this.ruleForm.choiceC,
+                    choiceD:this.ruleForm.choiceD,
+                    title:this.ruleForm.title,
+                    quizAns:''.concat(...this.ruleForm.choiceList),
+                    quizType:parseInt(this.ruleForm.quizType),
+                    quizLvl:this.ruleForm.isPro?1:0,
+                    solution:this.ruleForm.solution,
+                  }
+                  addQuiz(params).then(res => {
+                    if (res.code === 1) {
+                      this.$message.success('题目添加成功！')
+                      if (!st) {
+
+                      } else {
+                        this.ruleForm = {
+                          'choiceA': '',
+                          'choiceB': '',
+                          'choiceC': '',
+                          'choiceD': '',
+                          'title': '',
+                          choiceList: ['A'],
+                          quizType:'',
+                        }
+                      }
+                    } else {
+                      this.$message.error(res.msg || '操作失败')
+                    }
+                  }).catch(err => {
+                    this.$message.error('请求出错了：' + err)
+                  })
+              } else {
+                console.log('error submit!!')
+                return false
+              }
+            })
+          },
+        }
+      })
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+*{
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'defaultCharacter';
+  src: url('../fonts/clickCharacter.ttf');
+}
+
+@font-face {
+  font-family: 'FZTZ';
+  src: url('../fonts/FZTZ.TTF');
+}
+
+@font-face {
+  font-family: 'FZZJ';
+  src: url('../fonts/FZZJ-DNXSJW.ttf');
+}
+
+.LiPics {
+  position: absolute;
+  left: 80px;
+  top:  calc(50px + 3%);
+}
+.LiPics img {
+  position: absolute;
+  height: 750px;
+  width: 500px;
+  object-fit: fill;
+  border-radius: 5px;
+  border: 3px solid rgb(82, 59, 35);
+  filter: sepia(0.4);
+}
+.LiBtns {
+  position: absolute;
+  z-index: 1;
+  left: calc(14% + 600px);
+  bottom: 260px;
+}
+.LiBtn {
+  text-align: center;
+  z-index: 1;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  transform: none;
+  transition: 0.3s ease;
+  background-image: url("../images/common/circleOffset.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.LiBtn:hover {
+  transform: scale(1.1);
+}
+.LiBtn div{
+  transition: 0.3s ease;
+  position: absolute;
+  font-size: 40px;
+  color: #443d20;
+  font-family: FZTZ;
+}
+
+.Licharacters {
+  position: absolute;
+  left: calc(500px + 19%);
+  top:  calc(40px + 2%);
+}

@@ -1,0 +1,93 @@
+*{
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  transform-origin: center;
+}
+
+@font-face {
+  font-family: 'defaultCharacter';
+  src: url('../fonts/clickCharacter.ttf');
+}
+
+.organCharacter, .bodyCharacter {
+  font-family: defaultCharacter;
+  position: absolute;
+  color: #5b5230;
+}
+.organ_cyanBG{
+  position: absolute;
+  left: calc(2% + 50px);
+  top: calc(2% + 40px);
+  height: 850px;
+  width: 770px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../images/organs/cyanBG.png");
+}
+.body{
+  position: absolute;
+  left: calc(2% + 50px);
+  top: calc(2% + 40px);
+}
+.organ_layer{
+  position: absolute;
+}
+.organ_body{
+  position: absolute;
+  height: 800px;
+  width: 600px;
+  object-fit: contain;
+}
+.organ_choiceChar{
+  font-size: 60px;
+  font-family: FZTZ;
+  color:#323023;
+  writing-mode: vertical-lr;
+  width: 100px;
+  position: absolute;
+  left: calc(2% + 695px);
+  height: 250px;
+  word-spacing: 50px;
+  text-space: 50px;
+  transition: 0.3s ease-in-out;
+}
+.acupoint{
+  height: 600px;
+  width: 210px;
+  position: absolute;
+  object-fit: contain;
+  left: calc(2% + 350px);
+  top: calc(2% + 90px);
+  z-index: 150;
+}
+.organFocus{
+  left: calc(2% + 820px);
+  position: absolute;
+  top: calc(2% + 50px);
+}
+.organShow, .organUnshow{
+  position: absolute;
+  height: 350px;
+  width: 620px;
+  object-fit: contain;
+}
+.singleOrgan{
+  position: absolute;
+  object-fit: contain;
+  z-index: 150;
+}
+.organHint{
+  left: calc(10% + 300px);
+  position: absolute;
+  top: calc(30% + 500px);
+  font-family: FZTZ;
+  font-size: 50px;
+  color: #5b5230;
+}
+.organText{
+  position: absolute;
+  left: calc(2% + 1000px);
+  top: calc(2% + 580px);
+}

@@ -1,0 +1,248 @@
+*{
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'defaultCharacter';
+  src: url('../fonts/clickCharacter.ttf');
+}
+
+@font-face {
+  font-family: 'FZTZ';
+  src: url('../fonts/FZTZ.TTF');
+}
+
+@font-face {
+  font-family: 'FZZJ';
+  src: url('../fonts/FZZJ-DNXSJW.ttf');
+}
+.quizMain {
+  position: absolute;
+  left: 16%;
+  top: 11%;
+  width: 1200px;
+  height: 800px;
+  background-color: transparent;
+  border-radius: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../images/quiz/quizPage.png");
+}
+.quizStart, .quizSubmit, .quizNext {
+  position: absolute;
+  text-align: center;
+  vertical-align: center;
+  font-family: defaultCharacter;
+  font-size: 26px;
+  color: #fce3cc;
+  width: 180px;
+  height: 60px;
+  line-height: 60px;
+  transition: 0.2s ease;
+}
+.quizStart:hover, .quizSubmit:hover, .quizNext:hover {
+  transform: scale(1.1);
+}
+.quizStart:active, .quizSubmit:active, .quizNext:active {
+  transform: scale(1.1);
+}
+.quizStartPart {
+  position: absolute;
+  left: 400px;
+  top:300px;
+}
+.quizStart {
+  left: 85px;
+  top: 40px;
+}
+.quizSubmit {
+  left: 420px;
+  top: 600px;
+}
+.quizSubmit div,.quizNext div{
+  font-family: FZTZ;
+  color: white;
+  font-size: 50px;
+  z-index: 11;
+  line-height: 100px;
+  position: absolute;
+}
+.quizSubmit *,.quizNext *{
+   position: absolute;
+ }
+.quizNext {
+  left: 880px;
+  top: 600px;
+}
+.quizResult {
+  width: 150px;
+  height: 60px;
+  transition: 0.2s ease;
+  position: absolute;
+  font-family: defaultCharacter;
+  /*color: #563e20;*/
+  color: #ffffff;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: center;
+  left: 610px;
+  top: 620px;
+}
+.quizFeedback {
+  width: 230px;
+  height: 60px;
+  transition: 0.2s ease;
+  position: absolute;
+  font-family: defaultCharacter;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: center;
+  color: #ff8484;
+  left: 150px;
+  top: 640px;
+}
+.quizResultCharacter {
+  position: absolute;
+  font-family: defaultCharacter;
+  text-align: center;
+  vertical-align: center;
+  /*color: #563e20;*/
+  color: white;
+}
+.quizTitle {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+  width: 900px;
+}
+.quizTitleCharacter {
+  font-family: defaultCharacter;
+  position: absolute;
+  /*color: #563e20;*/
+  color: white;
+  width: 26px;
+  height: 26px;
+}
+.quizText video {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 7.5px;
+  transition: 0.2s ease;
+  object-fit: cover;
+  background-blend-mode: soft-light;
+}
+.quizDiv {
+  position: absolute;
+  left: 85px;
+  width: 50px;
+  height: 50px;
+}
+.quizChoiceRadio {
+  line-height: 35px;
+  font-size: 22px;
+  text-align: center;
+  font-family: defaultCharacter;
+  color: #d5b693;
+}
+.quizChoiceRadioActived {
+  line-height: 35px;
+  font-size: 22px;
+  text-align: center;
+  font-family: defaultCharacter;
+  color: #44331f;
+}
+.quizChoiceRadio {
+  position: absolute;
+  background-color: #eae0bd;
+  left: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #c7ba83;
+  transition: 0.2s ease;
+}
+.quizChoiceRadioActived {
+  position: absolute;
+  background-color: #ffffff;
+  left: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #c5b785;
+  transition: 0.2s ease;
+}
+.quizChoiceRadio:hover, .quizChoiceCheckbox:hover {
+  background-color: #c7ba90;
+  border-color: #9b8f57;
+}
+.quizChoiceRadioActived:hover, .quizChoiceCheckboxActived:hover {
+  background-color: #c7be97;
+  border-color: #7a6c3e;
+}
+.quizChoiceRadio:active, .quizChoiceCheckbox:active {
+  background-color: #e7dab2;
+  border-color: #b4a96f;
+}
+.quizChoiceRadioActived:active, .quizChoiceCheckboxActived:active {
+  background-color: #afa57d;
+  border-color: #695c30;
+}
+.quizChoiceCheckbox {
+  position: absolute;
+  background-color: #eae0bd;
+  left: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #c7ba83;
+  transition: 0.2s ease;
+}
+.quizChoiceCheckboxActived {
+  position: absolute;
+  background-color: #ffffff;
+  left: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #c5b785;
+  transition: 0.2s ease;
+}
+.quizChoice {
+  position: absolute;
+  left: 170px;
+  width: 800px;
+}
+.quizChoiceCharacter {
+  font-family: defaultCharacter;
+  position: absolute;
+  /*color: #5b5230;*/
+  color: white;
+}
+.quizTable{
+  left: calc(5% + 100px);
+  top: 40px;
+  width: 1250px;
+  height: 800px;
+}
+.quizBGChars{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.quizBGChars div{
+  font-family: FZTZ, serif;
+  position: absolute;
+  color: white;
+}
